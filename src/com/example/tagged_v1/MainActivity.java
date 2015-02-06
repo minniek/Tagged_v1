@@ -32,7 +32,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
 	// Declare widgets
 	Button send, clear;
-	EditText urlText;
+	EditText urlTxt;
 	TextView responseStrTxt, serverOutputTxt;
 	
 	// URL variables
@@ -47,7 +47,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 		// Map widgets to xml file
 		send = (Button)findViewById(R.id.send_btn);
 		clear = (Button)findViewById(R.id.clear_btn);
-		urlText = (EditText)findViewById(R.id.url_editText);
+		urlTxt = (EditText)findViewById(R.id.url_editText);
 		responseStrTxt = (TextView)findViewById(R.id.responseStr_textView);
 		
 		// Set onClickListener to buttons
@@ -55,14 +55,14 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 		clear.setOnClickListener((OnClickListener) this);
 		
 		// Preload URL to connect to Tagged! server that is running on localhost
-		urlText.setText("http://" + serverIP + "/" + serverPage, TextView.BufferType.EDITABLE);
+		urlTxt.setText("http://" + serverIP + "/" + serverPage, TextView.BufferType.EDITABLE);
 	}
 
 	// Assign tasks for buttons
 	public void onClick(View v) {
 		if (v == send) {
 			// Check for network connection before proceeding...
-			String stringURL = urlText.getText().toString();
+			String stringURL = urlTxt.getText().toString();
 			ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 			NetworkInfo nwInfo = connMgr.getActiveNetworkInfo();
 			// If network is present, start AsyncTask to connect to given URL
