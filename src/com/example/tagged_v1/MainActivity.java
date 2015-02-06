@@ -36,7 +36,7 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 	TextView responseStrTxt, serverOutputTxt;
 	
 	// URL variables
-	final String serverIP = "192.168.1.11"; // localhost for now...
+	final String serverIP = "*"; // localhost for now...
 	final String serverPage = "server_v1.php"; 
 	
 	@Override
@@ -94,12 +94,11 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 		}
 			
 		// onPostExecute displays the results of the AsyncTask
-        protected void onPostExecute(String responseStr) {
-            responseStrTxt.setText(responseStr);
+        protected void onPostExecute(String responseStr) }
+        	responseStrTxt.setText(responseStr);
         }
 		
 		private String connectToUrl(String url) throws IOException {
-			// Create HTTP URL 
 			URL myURL = new URL(url);
 			HttpURLConnection conn = (HttpURLConnection)myURL.openConnection();
 			
