@@ -94,9 +94,9 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 		}
 			
 		// onPostExecute displays the results of the AsyncTask
-        protected void onPostExecute(String responseStr) }
-        	responseStrTxt.setText(responseStr);
-        }
+		protected void onPostExecute(String responseStr) {
+        		responseStrTxt.setText(responseStr);
+        	}
 		
 		private String connectToUrl(String url) throws IOException {
 			URL myURL = new URL(url);
