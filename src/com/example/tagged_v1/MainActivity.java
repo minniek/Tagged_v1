@@ -14,13 +14,14 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-
 import android.support.v7.app.ActionBarActivity;
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.provider.Settings;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -32,22 +33,24 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 
 	// Declare widgets
 	Button send, clear;
-	EditText urlText;
+	EditText urlTxt;
 	TextView responseStrTxt, serverOutputTxt;
 	
 	// URL variables
 	final String serverIP = "192.168.1.11"; // localhost for now...
 	final String serverPage = "server_v1.php"; 
 	
+	@SuppressLint("InlinedApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
+		Settings.System.putString(getContentResolver(), Settings.Global.HTTP_PROXY, "192.168.16.129:1717"); 
 		
 		// Map widgets to xml file
 		send = (Button)findViewById(R.id.send_btn);
 		clear = (Button)findViewById(R.id.clear_btn);
-		urlText = (EditText)findViewById(R.id.url_editText);
+		urlTxt = (EditText)findViewById(R.id.url_editText);
 		responseStrTxt = (TextView)findViewById(R.id.responseStr_textView);
 		
 		// Set onClickListener to buttons
@@ -55,14 +58,14 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 		clear.setOnClickListener((OnClickListener) this);
 		
 		// Preload URL to connect to Tagged! server that is running on localhost
-		urlText.setText("http://" + serverIP + "/" + serverPage, TextView.BufferType.EDITABLE);
+		urlTxt.setText("http://" + serverIP + "/" + serverPage, TextView.BufferType.EDITABLE);
 	}
 
 	// Assign tasks for buttons
 	public void onClick(View v) {
 		if (v == send) {
 			// Check for network connection before proceeding...
-			String stringURL = urlText.getText().toString();
+			String stringURL = urlTxt.getText().toString();
 			ConnectivityManager connMgr = (ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
 			NetworkInfo nwInfo = connMgr.getActiveNetworkInfo();
 			// If network is present, start AsyncTask to connect to given URL
