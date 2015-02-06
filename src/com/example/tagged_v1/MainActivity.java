@@ -38,14 +38,15 @@ public class MainActivity extends ActionBarActivity implements View.OnClickListe
 	
 	// URL variables
 	final String serverIP = "*"; // localhost for now...
-	final String serverPage = "server_v1.php"; 
+	final String serverPage = "server_v1.php";
+	final String proxyIP = "*"; // <ip:port>
 	
 	@SuppressLint("InlinedApi")
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-		Settings.System.putString(getContentResolver(), Settings.Global.HTTP_PROXY, "192.168.16.129:1717"); 
+		Settings.System.putString(getContentResolver(), Settings.Global.HTTP_PROXY, proxyIP); 
 		
 		// Map widgets to xml file
 		send = (Button)findViewById(R.id.send_btn);
